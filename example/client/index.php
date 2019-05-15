@@ -11,8 +11,8 @@
 
 <?php
 require '../../vendor/autoload.php';
-define('CLIENT_URL', 'http://oauth2-client.dev');
-define('SERVER_URL', 'http://oauth2-server.dev');
+define('CLIENT_URL', 'http://www.oauth2-client.test');
+define('SERVER_URL', 'http://www.oauth2-server.test');
 define('REDIRECT_URI', CLIENT_URL.'/index.php');
 define('RESOURCE_URL', SERVER_URL.'/resource.php');
 
@@ -27,6 +27,11 @@ function userInfo(){
     } else {
         return false;
     }
+}
+
+function dd($val) {
+    var_dump($val);
+    exit;
 }
 
 
@@ -57,7 +62,6 @@ if (isset($_REQUEST['code']) && $_SERVER['REQUEST_URI']) {
     ]);
 
 
-
     $response = json_decode($response->getBody(), true);
     // 将令牌缓存到 SESSION中，方便后续访问
 
@@ -74,11 +78,16 @@ if (isset($_REQUEST['code']) && $_SERVER['REQUEST_URI']) {
     $_SESSION = array_merge($_SESSION, $userInfo);
 
 }
+/*
+$client = new GuzzleHttp\Client();
+$response = $client->request('GET', RESOURCE_URL.'?access_token='.$_SESSION['access_token']);
+$response = json_decode($response->getBody(), true);
+var_dump($response);exit();
+*/
 
+$auth_url = SERVER_URL."/authorize.php?response_type=code&client_id=".CLIENT_ID."&state=xyz&redirect_uri=". REDIRECT_URI;
 
-$auth_url = SERVER_URL."/authorize.php?response_type=code&client_id=testclient&state=xyz&redirect_uri=". REDIRECT_URI;
-
-
+var_dump($_SESSION);
 
 ?>
 

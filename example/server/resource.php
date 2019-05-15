@@ -5,6 +5,9 @@
  * Mail: 441358019@qq.com
  */
 
+/**
+ * access_token 使用: 获取用户信息
+ */
 require_once __DIR__."/common.php";
 
 $userInfo = [

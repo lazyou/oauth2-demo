@@ -10,13 +10,13 @@ ini_set('display_errors',1);error_reporting(E_ALL);
 
 require '../../vendor/autoload.php';
 
-$dsn      = 'mysql:dbname=my_oauth2_db;host=localhost';
-$username = 'root';
-$password = '123456';
+$dsn      = 'mysql:dbname=oauth2-demo;host=localhost';
+$username = 'homestead';
+$password = 'secret';
 
 
-define('CLIENT_URL', 'http://oauth2-client.dev');
-define('SERVER_URL', 'http://oauth2-server.dev');
+define('CLIENT_URL', 'http://www.oauth2-client.test');
+define('SERVER_URL', 'http://www.oauth2-server.test');
 
 //
 $storage = new \OAuth2\Storage\Pdo(array('dsn' => $dsn, 'username' => $username, 'password' => $password));
@@ -28,3 +28,7 @@ $server->addGrantType(new OAuth2\GrantType\AuthorizationCode($storage));
 
 session_start();
 
+function dd($val) {
+    var_dump($val);
+    exit;
+}

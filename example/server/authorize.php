@@ -1,6 +1,8 @@
 <?php
 
-
+/**
+ * 授权页面
+ */
 require_once __DIR__."/common.php";
 
 
