@@ -65,7 +65,8 @@ if (isset($_REQUEST['code']) && $_SERVER['REQUEST_URI']) {
     $response = json_decode($response->getBody(), true);
     // 将令牌缓存到 SESSION中，方便后续访问
 
- //   var_dump($response);exit;
+    var_dump("使用 code 获取 access_token: ");
+    var_dump($response);
     $_SESSION['access_token'] = $response['access_token'];
 
 
@@ -73,6 +74,8 @@ if (isset($_REQUEST['code']) && $_SERVER['REQUEST_URI']) {
     // 使用令牌获取用户信息
     $response = $client->request('GET', RESOURCE_URL.'?access_token='.$_SESSION['access_token']);
     $response = json_decode($response->getBody(), true);
+    var_dump("使用令牌获取用户信息: " . RESOURCE_URL.'?access_token='.$_SESSION['access_token']);
+    var_dump($response);
 
     $userInfo = $response['userInfo'];
     $_SESSION = array_merge($_SESSION, $userInfo);
